@@ -8,7 +8,7 @@ variable "awsprops" {
     subnet = "subnet-81896c8e"
     publicip = true
     keyname = "tf-metyis-key-pair"
-    secgroupname = "metyis_ec2_sg1"
+    secgroupname = "metyis_ec2_sg2"
   }
 }
 
@@ -18,7 +18,7 @@ provider "aws" {
   secret_key = ""
 }
 
-resource "aws_security_group" "metyis_ec2_sg1" {
+resource "aws_security_group" "metyis_ec2_sg2" {
   name = lookup(var.awsprops, "secgroupname")
   description = lookup(var.awsprops, "secgroupname")
 
@@ -57,7 +57,7 @@ resource "aws_instance" "metyis-ec2-instane" {
   associate_public_ip_address = lookup(var.awsprops, "publicip")
   key_name = lookup(var.awsprops, "keyname")
 
-  depends_on = [ aws_security_group.metyis_ec2_sg1 ]
+  depends_on = [ aws_security_group.metyis_ec2_sg2 ]
 }
 
 
