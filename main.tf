@@ -8,7 +8,7 @@ variable "awsprops" {
     subnet = "subnet-81896c8e"
     publicip = true
     keyname = "metyis-tf-instance-key-pair"
-    secgroupname = "metyis_ec2_sec_group"
+    secgroupname = "metyis_ec2_sg"
   }
 }
 
