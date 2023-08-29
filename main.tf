@@ -58,19 +58,6 @@ resource "aws_instance" "metyis-ec2-instane" {
   associate_public_ip_address = lookup(var.awsprops, "publicip")
   key_name = lookup(var.awsprops, "keyname")
 
-  root_block_device {
-    delete_on_termination = true
-    iops = 150
-    volume_size = 50
-    volume_type = "gp2"
-  }
-  tags = {
-    Name ="SERVER01"
-    Environment = "DEV"
-    OS = "UBUNTU"
-    Managed = "IAC"
-  }
-
   depends_on = [ aws_security_group.metyis_ec2_sg ]
 }
 
