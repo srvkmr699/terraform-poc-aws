@@ -21,7 +21,6 @@ provider "aws" {
 resource "aws_security_group" "metyis_ec2_sg" {
   name = lookup(var.awsprops, "secgroupname")
   description = lookup(var.awsprops, "secgroupname")
-  vpc_id = lookup(var.awsprops, "vpc")
 
   ingress {
     description = "SSH Port"
@@ -59,10 +58,6 @@ resource "aws_instance" "metyis-ec2-instane" {
   associate_public_ip_address = lookup(var.awsprops, "publicip")
   key_name = lookup(var.awsprops, "keyname")
 
-
-  vpc_security_group_ids = [
-    aws_security_group.metyis_ec2_sg.id
-  ]
   root_block_device {
     delete_on_termination = true
     iops = 150
