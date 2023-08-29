@@ -58,7 +58,7 @@ resource "aws_instance" "metyis-ec2-instane" {
   associate_public_ip_address = lookup(var.awsprops, "publicip")
   key_name = lookup(var.awsprops, "keyname")
 
-  depends_on = [ aws_security_group.metyis_ec2_sg ]
+  depends_on = [ aws_security_group.metyis_ec2_sg1 ]
 }
 
 
