@@ -3,11 +3,11 @@ variable "awsprops" {
   default = {
     region = "ap-south-1"
     vpc = "vpc-5234832d"
-    ami = "ami-0c1bea58988a989155"
+    ami = "ami-053b0d53c279acc90"
     itype = "t2.micro"
     subnet = "subnet-81896c8e"
     publicip = true
-    keyname = "myseckey"
+    keyname = "metyis-tf-instance-key-pair"
     secgroupname = "metyis_ec2_sg"
   }
 }
@@ -56,7 +56,7 @@ resource "aws_security_group" "metyis_ec2_sec_group" {
     
 }
 
-resource "aws_instance" "project-iac" {
+resource "aws_instance" "metyis-tf-instane" {
   ami = lookup(var.awsprops, "ami")
   instance_type = lookup(var.awsprops, "itype")
   subnet_id = lookup(var.awsprops, "subnet") #FFXsubnet2
