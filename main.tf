@@ -3,12 +3,12 @@ variable "awsprops" {
   default = {
     region = "ap-south-1"
     vpc = "vpc-5234832d"
-    ami = "ami-053b0d53c279acc90"
+    ami = "ami-0f5ee92e2d63afc18"
     itype = "t2.micro"
     subnet = "subnet-81896c8e"
     publicip = true
-    keyname = "metyis-tf-instance-key-pair"
-    secgroupname = "metyis_ec2_sg"
+    keyname = "tf-metyis-key-pair"
+    secgroupname = "metyis_ec2_sg1"
   }
 }
 
@@ -18,7 +18,7 @@ provider "aws" {
   secret_key = ""
 }
 
-resource "aws_security_group" "metyis_ec2_sg" {
+resource "aws_security_group" "metyis_ec2_sg1" {
   name = lookup(var.awsprops, "secgroupname")
   description = lookup(var.awsprops, "secgroupname")
 
