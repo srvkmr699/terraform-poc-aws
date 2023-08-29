@@ -8,7 +8,7 @@ variable "awsprops" {
     subnet = "subnet-81896c8e"
     publicip = true
     keyname = "metyis-tf-instance-key-pair"
-    secgroupname = "metyis_ec2_sg"
+    secgroupname = "metyis_ec2_sec_group"
   }
 }
 
@@ -18,7 +18,7 @@ provider "aws" {
   secret_key = ""
 }
 
-resource "aws_security_group" "metyis_ec2_sec_group" {
+resource "aws_security_group" "metyis_ec2_sg" {
   name = lookup(var.awsprops, "secgroupname")
   description = lookup(var.awsprops, "secgroupname")
   vpc_id = lookup(var.awsprops, "vpc")
@@ -46,17 +46,13 @@ resource "aws_security_group" "metyis_ec2_sec_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = metyis-ec2-sg
-  }
-
   lifecycle {
     create_before_destroy = true
   }
     
 }
 
-resource "aws_instance" "metyis-tf-instane" {
+resource "aws_instance" "metyis-ec2-instane" {
   ami = lookup(var.awsprops, "ami")
   instance_type = lookup(var.awsprops, "itype")
   subnet_id = lookup(var.awsprops, "subnet")
@@ -65,7 +61,7 @@ resource "aws_instance" "metyis-tf-instane" {
 
 
   vpc_security_group_ids = [
-    aws_security_group.project-iac-sg.id
+    aws_security_group.metyis_ec2_sg.id
   ]
   root_block_device {
     delete_on_termination = true
@@ -80,10 +76,10 @@ resource "aws_instance" "metyis-tf-instane" {
     Managed = "IAC"
   }
 
-  depends_on = [ aws_security_group.project-iac-sg ]
+  depends_on = [ aws_security_group.metyis_ec2_sg ]
 }
 
 
 output "ec2instance" {
-  value = aws_instance.project-iac.public_ip
+  value = aws_instance.metyis-ec2-instane.public_ip
 }
