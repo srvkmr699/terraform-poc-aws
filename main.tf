@@ -14,8 +14,6 @@ variable "awsprops" {
 
 provider "aws" {
   region = lookup(var.awsprops, "region")
-  access_key = ""
-  secret_key = ""
 }
 
 resource "aws_security_group" "metyis_ec2_sg2" {
